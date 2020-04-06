@@ -7,13 +7,13 @@ settingRoutes.route("/updateSetting/:userId").post(function (req, res) {
   const userId = req.params.userId;
   let settingParam = new Setting({
     userId: userId,
-    alertRadius: req.body.alertRadius,
+    alertDistance: req.body.alertDistance,
   });
   console.log("updateSetting settingParam", settingParam);
   Setting.findOne({ userId: userId }).then((setting) => {
     console.log("updateSetting found ", setting);
     if (setting) {
-      setting.alertRadius = settingParam.alertRadius;
+      setting.alertDistance = settingParam.alertDistance;
       console.log("updateSetting save setting ", setting);
       //update
       setting

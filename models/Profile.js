@@ -21,6 +21,8 @@ let Profile = new Schema(
     },
     gender: {
       type: String,
+      enum: ["male", "female", "other", "na"],
+      default: "na",
     },
   },
   {
