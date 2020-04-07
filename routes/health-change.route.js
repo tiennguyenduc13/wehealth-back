@@ -71,14 +71,20 @@ healthChangeRoutes.route("/update/:id").post(function (req, res) {
   });
 });
 
-// Defined delete | remove | destroy route
-healthChangeRoutes.route("/delete/:id").get(function (req, res) {
-  HealthChange.findByIdAndRemove({ _id: req.params.id }, function (
+healthChangeRoutes.route("/delete/:id").post(function (req, res) {
+  const healthChangeId = req.params.id;
+  console.log("Delete ", healthChangeId);
+
+  HealthChange.findByIdAndRemove({ _id: healthChangeId }, function (
     err,
     healthChange
   ) {
+    console.log("Delete found ", healthChange);
     if (err) res.json(err);
-    else res.json("Successfully removed");
+    else {
+      console.log("Delete Ok");
+      res.json(healthChangeId);
+    }
   });
 });
 
