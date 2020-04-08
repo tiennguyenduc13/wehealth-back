@@ -9,6 +9,7 @@ const healthChangeRoute = require("./routes/health-change.route");
 const positionMapRoute = require("./routes/position-map.route");
 const profileRoute = require("./routes/profile.route");
 const settingRoute = require("./routes/setting.route");
+const orgRoute = require("./routes/org.route");
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -30,6 +31,7 @@ app.use("/health-change", healthChangeRoute);
 app.use("/position-map", positionMapRoute);
 app.use("/profile", profileRoute);
 app.use("/setting", settingRoute);
+app.use("/org", orgRoute);
 
 const port = process.env.PORT || 4000;
 

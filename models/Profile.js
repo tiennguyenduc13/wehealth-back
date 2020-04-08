@@ -7,6 +7,9 @@ let Profile = new Schema(
     userId: {
       type: String,
     },
+    name: {
+      type: String,
+    },
     eventDate: {
       type: Date,
     },

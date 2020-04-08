@@ -5,21 +5,22 @@ const businessRoutes = express.Router();
 let Business = require("../models/Business");
 
 // Defined store route
-businessRoutes.route("/add").post(function(req, res) {
+businessRoutes.route("/add").post(function (req, res) {
+  console.log("ttt req.body", req.body);
   let business = new Business(req.body);
   business
     .save()
-    .then(business => {
+    .then((business) => {
       res.status(200).json({ business: "business in added successfully" });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(400).send("unable to save to database");
     });
 });
 
 // Defined get data(index or listing) route
-businessRoutes.route("/").get(function(req, res) {
-  Business.find(function(err, businesses) {
+businessRoutes.route("/").get(function (req, res) {
+  Business.find(function (err, businesses) {
     if (err) {
       console.log(err);
     } else {
@@ -29,28 +30,28 @@ businessRoutes.route("/").get(function(req, res) {
 });
 
 // Defined edit route
-businessRoutes.route("/edit/:id").get(function(req, res) {
+businessRoutes.route("/edit/:id").get(function (req, res) {
   let id = req.params.id;
-  Business.findById(id, function(err, business) {
+  Business.findById(id, function (err, business) {
     res.json(business);
   });
 });
 
 //  Defined update route
-businessRoutes.route("/update/:id").post(function(req, res) {
-  Business.findById(req.params.id, function(err, next, business) {
+businessRoutes.route("/update/:id").post(function (req, res) {
+  Business.findById(req.params.id, function (err, next, business) {
     if (!business) return next(new Error("Could not load Document"));
     else {
-      business.person_name = req.body.person_name;
+      business.name = req.body.person_name;
       business.business_name = req.body.business_name;
-      business.business_gst_number = req.body.business_gst_number;
+      business.number = req.body.business_gst_number;
 
       business
         .save()
-        .then(business => {
+        .then((business) => {
           res.json("Update complete");
         })
-        .catch(err => {
+        .catch((err) => {
           res.status(400).send("unable to update the database");
         });
     }
@@ -58,8 +59,8 @@ businessRoutes.route("/update/:id").post(function(req, res) {
 });
 
 // Defined delete | remove | destroy route
-businessRoutes.route("/delete/:id").get(function(req, res) {
-  Business.findByIdAndRemove({ _id: req.params.id }, function(err, business) {
+businessRoutes.route("/delete/:id").get(function (req, res) {
+  Business.findByIdAndRemove({ _id: req.params.id }, function (err, business) {
     if (err) res.json(err);
     else res.json("Successfully removed");
   });

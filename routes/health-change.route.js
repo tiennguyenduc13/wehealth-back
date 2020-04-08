@@ -19,12 +19,12 @@ healthChangeRoutes.route("/add").post(function (req, res) {
 });
 
 healthChangeRoutes.route("/listByUserId/:userId").get(function (req, res) {
-  res.header("Access-Control-Allow-Origin");
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+  //   res.header("Access-Control-Allow-Origin");
+  //   res.header("Access-Control-Allow-Origin", "*");
+  //   res.header(
+  //     "Access-Control-Allow-Headers",
+  //     "Origin, X-Requested-With, Content-Type, Accept"
+  //   );
 
   const userId = req.params.userId;
   console.log("Get list healthChange: ", userId);
@@ -62,7 +62,7 @@ healthChangeRoutes.route("/update/:id").post(function (req, res) {
       healthChange
         .save()
         .then((healthChange) => {
-          res.json("Update complete");
+          res.json(healthChange);
         })
         .catch((err) => {
           res.status(400).send("unable to update the database");

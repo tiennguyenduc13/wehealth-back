@@ -8,6 +8,7 @@ profileRoutes.route("/updateProfile/:userId").post(function (req, res) {
   let profileParam = new Profile({
     userId: userId,
     email: req.body.email,
+    name: req.body.name,
     cellPhone: req.body.cellPhone,
     dateOfBirth: req.body.dateOfBirth,
     gender: req.body.gender,
@@ -17,6 +18,7 @@ profileRoutes.route("/updateProfile/:userId").post(function (req, res) {
     console.log("updateProfile found ", profile);
     if (profile) {
       profile.email = profileParam.email;
+      profile.name = profileParam.name;
       profile.eventDate = new Date();
       profile.cellPhone = profileParam.cellPhone;
       profile.dateOfBirth = profileParam.dateOfBirth;
