@@ -1,5 +1,6 @@
 const express = require("express");
 const healthChangeRoutes = express.Router();
+const _ = require("lodash");
 
 // Require HealthChange model in our routes module
 let HealthChange = require("../models/HealthChange");

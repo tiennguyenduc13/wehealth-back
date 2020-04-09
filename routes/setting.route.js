@@ -1,5 +1,6 @@
 const express = require("express");
 const settingRoutes = express.Router();
+const _ = require("lodash");
 
 let Setting = require("../models/Setting");
 
@@ -14,6 +15,9 @@ settingRoutes.route("/updateSetting/:userId").post(function (req, res) {
     console.log("updateSetting found ", setting);
     if (setting) {
       setting.alertDistance = settingParam.alertDistance;
+      settingParam.eventDate = _.isEmpty(settingParam.eventDate)
+        ? new Date()
+        : settingParam.eventDate;
       console.log("updateSetting save setting ", setting);
       //update
       setting

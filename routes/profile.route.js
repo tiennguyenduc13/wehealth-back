@@ -1,5 +1,6 @@
 const express = require("express");
 const profileRoutes = express.Router();
+const _ = require("lodash");
 
 let Profile = require("../models/Profile");
 
@@ -19,7 +20,9 @@ profileRoutes.route("/updateProfile/:userId").post(function (req, res) {
     if (profile) {
       profile.email = profileParam.email;
       profile.name = profileParam.name;
-      profile.eventDate = new Date();
+      profile.eventDate = _.isEmpty(profile.eventDate())
+        ? new Date()
+        : profile.eventDate;
       profile.cellPhone = profileParam.cellPhone;
       profile.dateOfBirth = profileParam.dateOfBirth;
       profile.gender = profileParam.gender;

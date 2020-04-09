@@ -9,7 +9,7 @@ orgRoutes.route("/add").post(function (req, res) {
   let org = new Org(req.body);
   const creatorId = org.creatorId;
   if (!_.isEmpty(creatorId)) {
-    org.eventDate = new Date();
+    org.eventDate = _.isEmpty(org.eventDate) ? new Date() : org.eventDate;
     org.members.push(creatorId);
     console.log("Adding org ", req.body);
     org
@@ -57,12 +57,6 @@ orgRoutes.route("/addMember/:orgId/:memberId").post(function (req, res) {
 });
 
 orgRoutes.route("/listByCreator/:creatorId").get(function (req, res) {
-  //   res.header("Access-Control-Allow-Origin");
-  //   res.header("Access-Control-Allow-Origin", "*");
-  //   res.header(
-  //     "Access-Control-Allow-Headers",
-  //     "Origin, X-Requested-With, Content-Type, Accept"
-  //   );
   const creatorId = req.params.creatorId;
   let filter = {};
   if (creatorId) {
@@ -73,6 +67,39 @@ orgRoutes.route("/listByCreator/:creatorId").get(function (req, res) {
     if (err) {
       console.log(err);
     } else {
+      res.json(orgs);
+    }
+  });
+});
+
+orgRoutes.route("/listByMember/:memberId").get(function (req, res) {
+  const memberId = req.params.memberId;
+  let filter = {};
+  if (memberId) {
+    filter = { members: memberId };
+  }
+  console.log("Get list org filter: ", filter);
+  Org.find(filter, (err, orgs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(orgs);
+    }
+  });
+});
+
+orgRoutes.route("/listExceptMember/:memberId").get(function (req, res) {
+  const memberId = req.params.memberId;
+  let filter = {};
+  if (memberId) {
+    filter = { members: { $ne: memberId } };
+  }
+  console.log("Get list org filter: ", filter);
+  Org.find(filter, (err, orgs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Found ", orgs);
       res.json(orgs);
     }
   });

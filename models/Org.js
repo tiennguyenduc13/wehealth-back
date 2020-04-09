@@ -13,6 +13,9 @@ let Org = new Schema(
     name: {
       type: String,
     },
+    description: {
+      type: String,
+    },
     members: {
       type: [String],
     },
