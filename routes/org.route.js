@@ -72,6 +72,23 @@ orgRoutes.route("/listByCreator/:creatorId").get(function (req, res) {
   });
 });
 
+orgRoutes.route("/:orgId").get(function (req, res) {
+  const orgId = req.params.orgId;
+  if (orgId) {
+    console.log("Find org : ", orgId);
+    Org.findById(orgId, (err, org) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Found org : ", org);
+        res.json(org);
+      }
+    });
+  } else {
+    res.json({});
+  }
+});
+
 orgRoutes.route("/listByMember/:memberId").get(function (req, res) {
   const memberId = req.params.memberId;
   let filter = {};
@@ -83,6 +100,7 @@ orgRoutes.route("/listByMember/:memberId").get(function (req, res) {
     if (err) {
       console.log(err);
     } else {
+      console.log("Found list org : ", orgs);
       res.json(orgs);
     }
   });
@@ -106,12 +124,6 @@ orgRoutes.route("/listExceptMember/:memberId").get(function (req, res) {
 });
 
 orgRoutes.route("/members/:orgId/:memberId").get(function (req, res) {
-  //   res.header("Access-Control-Allow-Origin");
-  //   res.header("Access-Control-Allow-Origin", "*");
-  //   res.header(
-  //     "Access-Control-Allow-Headers",
-  //     "Origin, X-Requested-With, Content-Type, Accept"
-  //   );
   const orgId = req.params.orgId;
   const memberId = req.params.memberId;
   const filter = {

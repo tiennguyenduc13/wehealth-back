@@ -1,25 +1,24 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// Define collection and schema for PositionMap
 let PositionMap = new Schema(
   {
     userId: {
-      type: String
+      type: String,
     },
     eventDate: {
-      type: Date
+      type: Date,
     },
     healthSignals: {
-      type: [String]
+      type: [String],
     },
     position: {
       lat: Number,
-      lng: Number
-    }
+      lng: Number,
+    },
   },
   {
-    collection: "position-map"
+    collection: "position-map",
   }
 );
 

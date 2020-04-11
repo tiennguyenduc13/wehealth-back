@@ -2,7 +2,6 @@ const express = require("express");
 const healthChangeRoutes = express.Router();
 const _ = require("lodash");
 
-// Require HealthChange model in our routes module
 let HealthChange = require("../models/HealthChange");
 
 // Defined store route
@@ -20,13 +19,6 @@ healthChangeRoutes.route("/add").post(function (req, res) {
 });
 
 healthChangeRoutes.route("/listByUserId/:userId").get(function (req, res) {
-  //   res.header("Access-Control-Allow-Origin");
-  //   res.header("Access-Control-Allow-Origin", "*");
-  //   res.header(
-  //     "Access-Control-Allow-Headers",
-  //     "Origin, X-Requested-With, Content-Type, Accept"
-  //   );
-
   const userId = req.params.userId;
   console.log("Get list healthChange: ", userId);
   HealthChange.find({ userId: userId }, (err, healthChanges) => {
@@ -52,7 +44,6 @@ healthChangeRoutes.route("/latest/:userId").get(function (req, res) {
     });
 });
 
-//  Defined update route
 healthChangeRoutes.route("/update/:id").post(function (req, res) {
   const id = req.params.id;
   HealthChange.findById(id, function (err, next, healthChange) {

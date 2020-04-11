@@ -10,6 +10,7 @@ const positionMapRoute = require("./routes/position-map.route");
 const profileRoute = require("./routes/profile.route");
 const settingRoute = require("./routes/setting.route");
 const orgRoute = require("./routes/org.route");
+const messageRoute = require("./routes/message.route");
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -32,6 +33,7 @@ app.use("/position-map", positionMapRoute);
 app.use("/profile", profileRoute);
 app.use("/setting", settingRoute);
 app.use("/org", orgRoute);
+app.use("/message", messageRoute);
 
 const port = process.env.PORT || 4000;
 

@@ -1,21 +1,20 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// Define collection and schema for HealthChange
 let HealthChange = new Schema(
   {
     userId: {
-      type: String
+      type: String,
     },
     eventDate: {
-      type: Date
+      type: Date,
     },
     healthSignals: {
-      type: [String]
-    }
+      type: [String],
+    },
   },
   {
-    collection: "health-change"
+    collection: "health-change",
   }
 );
 
