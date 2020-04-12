@@ -11,6 +11,7 @@ const profileRoute = require("./routes/profile.route");
 const settingRoute = require("./routes/setting.route");
 const orgRoute = require("./routes/org.route");
 const messageRoute = require("./routes/message.route");
+const inviteRoute = require("./routes/invite.route");
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -34,6 +35,7 @@ app.use("/profile", profileRoute);
 app.use("/setting", settingRoute);
 app.use("/org", orgRoute);
 app.use("/message", messageRoute);
+app.use("/invite", inviteRoute);
 
 const port = process.env.PORT || 4000;
 

@@ -14,13 +14,13 @@ profileRoutes.route("/updateProfile/:userId").post(function (req, res) {
     dateOfBirth: req.body.dateOfBirth,
     gender: req.body.gender,
   });
-  console.log("updateProfile profileParam", profileParam);
+  console.log("Doing updateProfile profileParam", profileParam);
   Profile.findOne({ userId: userId }).then((profile) => {
     console.log("updateProfile found ", profile);
     if (profile) {
       profile.email = profileParam.email;
       profile.name = profileParam.name;
-      profile.eventDate = _.isEmpty(profile.eventDate())
+      profile.eventDate = _.isEmpty(profile.eventDate)
         ? new Date()
         : profile.eventDate;
       profile.cellPhone = profileParam.cellPhone;
@@ -31,9 +31,11 @@ profileRoutes.route("/updateProfile/:userId").post(function (req, res) {
       profile
         .save()
         .then((resData) => {
+          console.log("updateProfile save profile done", resData);
           res.status(200).json(resData);
         })
         .catch((err) => {
+          console.log("Error ", err);
           res.status(400).send("unable to save to database");
         });
     } else {
@@ -44,9 +46,11 @@ profileRoutes.route("/updateProfile/:userId").post(function (req, res) {
       profileParam
         .save()
         .then((profile) => {
+          console.log("updateProfile add new done profile ", profile);
           res.status(200).json({ profile });
         })
         .catch((err) => {
+          console.log("Error ", err);
           res.status(400).send("unable to save to database");
         });
     }

@@ -6,17 +6,29 @@ let Invite = new Schema(
     inviterId: {
       type: String,
     },
+    inviterEmail: {
+      type: String,
+    },
+    inviteDate: {
+      type: Date,
+    },
+    acceptDate: {
+      type: Date,
+    },
+    orgId: {
+      type: String,
+    },
+    inviteText: {
+      type: String,
+    },
+    inviteStatus: {
+      type: String,
+    },
     inviteeId: {
       type: String,
     },
     inviteeEmail: {
       type: String,
-    },
-    eventDate: {
-      type: Date,
-    },
-    inviteStatus: {
-      type: String, //pending
     },
   },
   {

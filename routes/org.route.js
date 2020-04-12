@@ -4,6 +4,7 @@ const _ = require("lodash");
 
 let Org = require("../models/Org");
 let Profile = require("../models/Profile");
+const { addMemberToOrg } = require("./org.function");
 
 orgRoutes.route("/add").post(function (req, res) {
   let org = new Org(req.body);
@@ -31,29 +32,7 @@ orgRoutes.route("/addMember/:orgId/:memberId").post(function (req, res) {
   const orgId = req.params.orgId;
   const memberId = req.params.memberId;
   console.log("Adding member to org", memberId, orgId);
-  Org.findById(orgId, function (err, org) {
-    if (err) {
-      console.log(err);
-      res.status(404).send("Unable to addMember");
-    } else {
-      if (!org) res.json({});
-      else {
-        if (!org.members.includes(memberId)) {
-          org.members.push(memberId);
-          org
-            .save()
-            .then((org) => {
-              console.log("addMember done", org);
-              res.json(org);
-            })
-            .catch((err) => {
-              console.log("addMember err", err);
-              res.status(400).send("Unable to addMember");
-            });
-        }
-      }
-    }
-  });
+  addMemberToOrg(req, res, memberId, orgId);
 });
 
 orgRoutes.route("/listByCreator/:creatorId").get(function (req, res) {

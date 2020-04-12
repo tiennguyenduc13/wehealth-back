@@ -47,7 +47,7 @@ healthChangeRoutes.route("/latest/:userId").get(function (req, res) {
 healthChangeRoutes.route("/update/:id").post(function (req, res) {
   const id = req.params.id;
   HealthChange.findById(id, function (err, next, healthChange) {
-    if (!healthChange) return next(new Error("Could not load Document"));
+    if (!healthChange) return next(new Error("Could not load HealthChange"));
     else {
       healthChange.userId = req.body.userId;
 
